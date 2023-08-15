@@ -5,8 +5,7 @@ import { useParams } from "react-router-dom";
 import styles from "./Restaurant.module.css";
 import Cart from "./Cart";
 import Dish from "./Dish";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 
 interface CartItem {
   objectId: string;
@@ -14,7 +13,6 @@ interface CartItem {
   price: number;
   quantity: number;
 }
-
 
 interface DishItem {
   objectId: string;
@@ -28,52 +26,64 @@ const Restaurant: React.FC = () => {
   const { loading, error, data } = useQuery(GET_RESTAURANT_BY_ID, {
     variables: { id },
   });
-
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   const restaurant = data.getRestaurantById;
+  
 
   const addToCart = (dish: DishItem) => {
-    const existingItem = cartItems.find(item => item.name === dish.name); //Busca se o prato já está no carrinho
+    const existingItem = cartItems.find((item) => item.name === dish.name); //Busca se o prato já está no carrinho
 
-    if (existingItem) {  
-      setCartItems(prevCartItems => //Verifica se o nome do prato é mesmo que está no carrinho, se sim ele cria um novo objeto com a mesma estrutura aumentado o tamanho, se não ele não faz nada
-        prevCartItems.map(item =>
+    if (existingItem) {
+      setCartItems((
+        prevCartItems //Verifica se o nome do prato é mesmo que está no carrinho, se sim ele cria um novo objeto com a mesma estrutura aumentado o tamanho, se não ele não faz nada
+      ) =>
+        prevCartItems.map((item) =>
           item.name === dish.name
             ? { ...item, quantity: item.quantity + 1 }
             : item
         )
       );
-    } else { // se não existir o prato ele cria um novo array incluido os antigos pratos que já estava registrado e adiciona o novo
-      setCartItems(prevCartItems => [
+    } else {
+      // se não existir o prato ele cria um novo array incluido os antigos pratos que já estava registrado e adiciona o novo
+      setCartItems((prevCartItems) => [
         ...prevCartItems,
-        { ...dish, quantity: 1 }
+        { ...dish, quantity: 1 },
       ]);
     }
   };
-
 
   return (
     <>
       <section className={styles.sectionRestaurant}>
         <div className={styles.highlightRestaurant}>
-          <img src="/src/images/restaurant1.png" alt="" />
+          <img className={styles.imageRestaurant} src="/src/images/restaurant1.png" alt="" />
           <div className={styles.infoRestaurant}>
             <h3>{restaurant.name}</h3>
-            <p className={styles.locationRestaurant}>
-              {" "}
-              567 Fresh St, Food City
-            </p>
+            <p className={styles.locationRestaurant}>{restaurant.location}</p>
 
             <ul>
               <li>
                 <div className={styles.ratingRestaurant}>
                   <div className={styles.starRatingRestaurant}>
                     <img src={"/src/images/starGreen.png"} alt="" />
-                    <span>4.0</span>
+                    <span>{restaurant.rating}</span>
                   </div>
 
                   <p>100+ ratings</p>
@@ -81,7 +91,7 @@ const Restaurant: React.FC = () => {
               </li>
               <li>
                 <div>
-                  <p>30 mins</p>
+                  <p>{restaurant.deliveryTime}</p>
                   <p>Delivery Time</p>
                 </div>
               </li>
@@ -117,24 +127,37 @@ const Restaurant: React.FC = () => {
         </div>
       </section>
       <section className={styles.sectionDishes}>
-        <div className={styles.recommendation}>
-          <ul>
-            <li>Recommended</li>
-            <li>Breakfast Box</li>
-            <li>Lunch Box</li>
-            <li>Combo Box</li>
-            <li>Biriyani Box</li>
-          </ul>
-        </div>
+        {windowWidth > 1024 ? (
+          <div className={styles.recommendation}>
+            <ul>
+              <li>Recommended</li>
+              <li>Breakfast Box</li>
+              <li>Lunch Box</li>
+              <li>Combo Box</li>
+              <li>Biriyani Box</li>
+            </ul>
+          </div>
+        ) : (
+          <div className={styles.recommendationDropDown}>
+            <select name="recommendations" id="recommendations">
+              <option value={'Recommended'}>Recommended</option>
+              <option value={'Breakfast Box'}>Breakfast Box</option>
+              <option value={'Lunch Box'}>Lunch Box</option>
+              <option value={'Combo Box'}>Combo Box</option>
+              <option value={'Biriyani Box'}>Biriyani Box</option>
+            </select>
+          </div>
+        )}
+
         <div className={styles.dishes}>
           <ul>
-            {restaurant.topDishes.map((dish:{objectId:string}) => (
-              <Dish key={dish.objectId} dish={dish} addToCart={addToCart}/>
+            {restaurant.topDishes.map((dish: { objectId: string }) => (
+              <Dish key={dish.objectId} dish={dish} addToCart={addToCart} />
             ))}
           </ul>
         </div>
 
-        <Cart cartItems={cartItems} setCartItems={setCartItems}/>
+        <Cart cartItems={cartItems} setCartItems={setCartItems} />
       </section>
     </>
   );

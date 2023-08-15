@@ -1,142 +1,190 @@
-
-.sectionRestaurant{
-    background-color: black;
-    margin-top: 3%;
+.sectionRestaurant {
+  background-color: black;
+  margin-top: 3%;
 }
 
-.highlightRestaurant{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: black;
-    color: white;
-    padding: 30px 10px 0 10px;
-    font-size: 16px;
-    margin-top: 30px;
+.highlightRestaurant {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: black;
+  color: white;
+  padding: 30px 10px 0 10px;
+  font-size: 16px;
+  margin-top: 30px;
+}
+.imageRestaurant {
+  width: 400px;
 }
 
-.infoRestaurant h3{
-    font-size: 32px;
-    margin-bottom: 16px;
+.infoRestaurant h3 {
+  font-size: 32px;
+  margin-bottom: 16px;
 }
 
-.locationRestaurant{
-    margin-top: 0;
+.locationRestaurant {
+  margin-top: 0;
 }
 
-.infoRestaurant{
-    padding: 0 20px;
+.infoRestaurant {
+  padding: 0 20px;
 }
 
-.infoRestaurant ul{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0;
-    gap: 100px;
+.infoRestaurant ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  gap: 100px;
+  list-style: none;
 }
 
-
-.infoRestaurant ul li p{
-   margin: 0;
+.infoRestaurant ul li p {
+  margin: 0;
 }
 
-.offerRestaurant{
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: 3px dashed rgba(252, 128, 25, 1);
+.offerRestaurant {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 3px dashed rgba(252, 128, 25, 1);
 }
 
-.offerRestaurant h5{
-    font-size: 24px;
-    margin: 15px 0;
-    color: rgba(252, 128, 25, 1);
-    ;
+.offerRestaurant h5 {
+  font-size: 24px;
+  margin: 15px 0;
+  color: rgba(252, 128, 25, 1);
 }
 
-.starRatingRestaurant{
-    display: flex;
-    gap: 10px;
-    align-items: center;
+.starRatingRestaurant {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-.descriptionOfferRestaurant{
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.descriptionOfferRestaurant {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.searchInput{
-    position: relative;
-    top: 5%;
-    left: 5%;
-    text-align: center;
+.searchInput {
+  position: relative;
+  top: 5%;
+  left: 5%;
+  text-align: center;
 }
 
-.searchInputFlex{
+.searchInputFlex {
+  display: inline-flex;
+  align-items: center;
+  width: 40%;
+}
+
+.searchDishInput {
+  border: transparent;
+  flex: 1;
+  background-image: url("/src/images/lupa.png");
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px; /* Ajuste o tamanho do ícone */
+  padding-right: 30px;
+  box-shadow: rgba(131, 138, 146, 0.2) 0px 8px 24px;
+  margin-right: 20px;
+}
+
+.searchInput button {
+  border-radius: 10px;
+  width: 150px;
+  height: 45px;
+  background: white;
+  border: none;
+  color: black;
+  box-shadow: rgba(131, 138, 146, 0.2) 0px 8px 24px;
+  cursor: pointer;
+}
+
+.searchButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.sectionDishes {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  align-items: baseline;
+}
+
+.recommendation {
+  border-right: 1px solid black;
+  height: 80%;
+  padding: 0 15%;
+}
+
+.recommendation ul {
+  list-style: none;
+  text-align: end;
+}
+.recommendation ul li {
+  padding-bottom: 20px;
+}
+
+.recommendationDropDown {
+  margin-top: 20%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.recommendationDropDown select {
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background-color: white;
+  width: 100%;
+  max-width: 250px;
+  box-sizing: border-box;
+  cursor: pointer;
+  appearance: none;
+  text-align: center;
+}
+
+.recommendationDropDown select option {
+  font-size: 16px;
+  padding: 8px;
+}
+
+.recommendationDropDown select:focus {
+  outline: none;
+}
+
+.dishes ul {
+  padding: 0 6%;
+}
+
+@media (max-width: 1024px) {
+  .highlightRestaurant {
+    flex-direction: column;
+  }
+  .searchInput {
+    left: 0;
+  }
+  .searchInputFlex {
     display: inline-flex;
     align-items: center;
-    width: 40%;
-}
+    flex-direction: column-reverse;
+    width: 100%;
+    gap: 20px;
+  }
 
-.searchDishInput{
-    border: transparent;
-    flex: 1;
-    background-image: url("/src/images/lupa.png");
-    background-position: right 10px center;
-    background-repeat: no-repeat;
-    background-size: 20px 20px; /* Ajuste o tamanho do ícone */
-    padding-right: 30px;
-    box-shadow: rgba(131, 138, 146, 0.2) 0px 8px 24px;
-    margin-right: 20px;
-    
-}
+  .searchDishInput {
+    margin-right: 0;
+  }
 
-.searchInput button{
-    border-radius: 10px;
-    width: 150px;
-    height: 45px;
-    background: white;
-    border: none;
-    color: black;
-    box-shadow: rgba(131, 138, 146, 0.2) 0px 8px 24px;
-    cursor: pointer;
-}
-
-.searchButton{
+  .sectionDishes {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+  }
 }
-
-
-
-.sectionDishes{
-    display: grid;
-    grid-template-columns: 25% 50% 25%;
-    align-items: baseline;
-
-}
-
-.recommendation{
-    border-right: 1px solid black;
-    height: 80%;
-    padding: 0 15%;
-}
-
-.recommendation ul{
-    list-style: none;
-    text-align: end;
-    
-
-}
-.recommendation ul li{
-    padding-bottom: 20px;
-
-}
-
-.dishes ul{
-    padding: 0 6%;
-}
-

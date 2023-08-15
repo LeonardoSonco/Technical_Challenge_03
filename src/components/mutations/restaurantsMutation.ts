@@ -18,6 +18,9 @@ export const GET_RESTAURANT_BY_ID = gql`
     getRestaurantById(id: $id) {
       objectId
       name
+      location
+      deliveryTime
+      rating
       topDishes {
         objectId
       }

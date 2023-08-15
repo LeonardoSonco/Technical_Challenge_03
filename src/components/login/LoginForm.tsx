@@ -5,7 +5,7 @@ import Input from "../UI/Input";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../mutations/loginMutation";
 import styles from "./LoginForm.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface FormData {
   userName: string;
@@ -19,7 +19,7 @@ const LoginForm: React.FC = () => {
   });
 
   const [inputError, setInputError] = useState("");
-
+  const navigate = useNavigate();
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -54,7 +54,7 @@ const LoginForm: React.FC = () => {
           password: formData.password,
         },
       });
-
+      navigate("/homepage");
       console.log(data);
     } catch (error) {
       setInputError("Usuario ou senha incorretos!");

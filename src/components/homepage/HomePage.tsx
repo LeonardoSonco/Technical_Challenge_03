@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       <section className={styles.homeFlex}>
-        <div>
+        <div className={styles.homeImgEffect}>
           <img src="./src/images/UnionHome.png" alt="" />
         </div>
         <div className={styles.homeDescription}>
@@ -37,7 +37,7 @@ const HomePage: React.FC = () => {
             aliquip ex ea commodo consequat.
           </p>
         </div>
-        <div>
+        <div className={styles.homeDishImgInfo}>
           <img src="./src/images/pratosHome.png" alt="" />
         </div>
       </section>
