@@ -1,0 +1,21 @@
+.registerForm{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+    margin: 0 auto;
+    padding: 30px;
+    max-width: 360px;
+}
+
+.haveAccount{
+    text-align: center;
+}
+
+
+.errorMessage {
+    color: red;
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
+  }

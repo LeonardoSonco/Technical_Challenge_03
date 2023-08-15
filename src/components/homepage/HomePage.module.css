@@ -1,0 +1,42 @@
+.homeFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5% 0;
+}
+
+.homeDescription{
+    font-size: 40px;
+    line-height: 90px;
+    
+}
+
+.homeDescription span{
+    color: orange;
+}
+
+.homeDescription p{
+    font-size: 16px;
+    line-height: 25px;
+    font-family: 'Inter';
+}
+
+.homeRestaurants{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.homeRestaurants ul{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Define a largura mínima e permite que as colunas se ajustem automaticamente */
+    grid-gap: 30px; /* Espaçamento entre os itens */
+    
+    
+}
+
+
+.linkRestaurant{
+    text-decoration:  none;
+}

@@ -1,0 +1,55 @@
+.cardExternRestaurant{
+    background-color: rgba(248, 248, 248, 1);
+    width: 300px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.cardExternRestaurant:hover{
+    transform: scale(1.05);
+}
+
+.listRestaurant{
+    width: 85%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.dishRestaurant{
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+    color: rgba(32, 32, 32, 1);
+    margin-bottom: 0;
+}
+
+.nameRestaurant{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.nameRestaurant p{
+    font-size: 16px;
+    color: rgba(128, 128, 128, 1);
+}
+
+.ratingRestaurant{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(32, 32, 32, 1);
+    font-weight: 500;
+}
+
+.timeDeliveryRestaurant{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: rgba(32, 32, 32, 1);
+    font-size: 16px;
+    font-weight: 500;
+}

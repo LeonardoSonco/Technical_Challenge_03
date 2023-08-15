@@ -1,0 +1,24 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+  margin: 0 auto;
+  padding: 30px;
+  max-width: 360px;
+}
+
+.footerList ul {
+  display: flex;
+}
+
+.haveAccount {
+  text-align: center;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: center;
+}
