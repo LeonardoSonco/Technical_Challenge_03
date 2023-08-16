@@ -11,21 +11,21 @@ interface CartProps {
   onUpdateQuantity: (itemId: string, newQuantity: number) => void;
   onRemoveItem: (itemId: string) => void;
 }
-const AddDish: React.FC<CartProps> = ({ cartItems, onUpdateQuantity,onRemoveItem }) => {
-  
-  
-  
+const AddDish: React.FC<CartProps> = ({
+  cartItems,
+  onUpdateQuantity,
+  onRemoveItem,
+}) => {
   const handleDecrease = (itemId: string) => {
     const foundItem = cartItems.find((item) => item.objectId === itemId);
     if (foundItem) {
       const updatedQuantity = Math.max(0, foundItem.quantity - 1);
-      if(updatedQuantity ===0){
-        onRemoveItem(itemId)
-        console.log('remove')
-      }else{
+      if (updatedQuantity === 0) {
+        onRemoveItem(itemId);
+        console.log("remove");
+      } else {
         onUpdateQuantity(itemId, updatedQuantity);
       }
-     
     }
   };
 
@@ -44,9 +44,19 @@ const AddDish: React.FC<CartProps> = ({ cartItems, onUpdateQuantity,onRemoveItem
             <span>${item.price}</span>
           </div>
           <div className={styles.addDish}>
-            <button onClick={() => handleDecrease(item.objectId)} className={styles.buttonPlus}>-</button>
+            <button
+              onClick={() => handleDecrease(item.objectId)}
+              className={styles.buttonPlus}
+            >
+              -
+            </button>
             <span>{item.quantity}</span>
-            <button onClick={() => handleIncrease(item.objectId)} className={styles.buttonPlus}>+</button>
+            <button
+              onClick={() => handleIncrease(item.objectId)}
+              className={styles.buttonPlus}
+            >
+              +
+            </button>
           </div>
         </div>
       ))}

@@ -3,6 +3,7 @@
   margin: 0 auto;
 }
 
+
 .navbarHeaderAuth img {
   display: block;
   width: 100px;
@@ -10,9 +11,14 @@
 }
 
 .navbarHeaderAuth {
+  display: block;
   margin-bottom: 0;
   padding-bottom: 10px;
   border-bottom: 1px solid black;
+}
+
+.navbarHeaderAuth{
+  padding-top: 3%;
 }
 
 .navbarHeader {

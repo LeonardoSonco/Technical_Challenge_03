@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./Header.module.css";
-import { Link } from "react-router-dom";
 
 interface HeaderProps {
   title: string;
@@ -43,9 +43,11 @@ const Header: React.FC<HeaderProps> = ({ title, loginIsTrue }) => {
                     alt="Sacola de compras"
                     className={styles.navbarHeaderBag}
                   />
-                  <button className={styles.navbarHeaderSearchButton}>
-                    Sign In
-                  </button>
+                  <Link to={"/"}>
+                    <button className={styles.navbarHeaderSearchButton}>
+                      Sign In
+                    </button>
+                  </Link>
                 </div>
               </div>
             ) : (
@@ -64,25 +66,18 @@ const Header: React.FC<HeaderProps> = ({ title, loginIsTrue }) => {
                       Sign In
                     </button>
                   </div>
-                  
                 </div>
-                <input
-                    type="text"
-                    className={styles.navbarHeaderSearchInput}
-                  />
+                <input type="text" className={styles.navbarHeaderSearchInput} />
               </>
             )}
           </>
         ) : (
           <>
-            <div className={styles.navbarHeader}>
+            <div className={styles.navbarHeaderAuth}>
               <Link to={"/homepage"}>
                 <img src="/src/images/logo.png" alt="Logo FitMe" />
               </Link>
-              <div className={styles.navbarHeaderAuth}>
-                <img src="/src/images/logo.png" alt="Logo FitMe" />
-                <h3>{title}</h3>
-              </div>
+              <h3>{title}</h3>
             </div>
           </>
         )}

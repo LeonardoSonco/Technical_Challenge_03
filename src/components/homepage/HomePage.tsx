@@ -1,16 +1,66 @@
-import { useQuery } from "@apollo/client";
-import { GET_RESTAURANTS } from "../mutations/restaurantsMutation";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 import styles from "./HomePage.module.css";
+
 import Card from "./Card";
-import { Link } from "react-router-dom";
+
+import { GET_RESTAURANTS_ALL } from "../queries/restaurantsQuery";
+
+interface Restaurant {
+  objectId: string;
+  name: string;
+  rating: number;
+  deliveryTime: string;
+  isExpensive: boolean
+  // outras propriedades do restaurante, se houver
+}
+
+
+interface RestaurantEdge {
+  node: {
+    objectId: string;
+    name: string;
+    rating: number;
+    deliveryTime: string;
+    isExpensive: boolean;
+    // outras propriedades do restaurante, se houver
+  };
+}
 
 const HomePage: React.FC = () => {
-  const { loading, error, data } = useQuery(GET_RESTAURANTS);
-  console.log(data);
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  useEffect(() => {
+    async function lookRestaurants() {
+      const endpoint = "https://parseapi.back4app.com/graphql";
+      const headers = {
+        "X-Parse-Application-Id": "DSiIkHz2MVbCZutKS7abtgrRVsiLNNGcs0L7VsNL",
+        "X-Parse-Master-Key": "0cpnqkSUKVkIDlQrNxameA6OmjxmrA72tsUMqVG9",
+        "X-Parse-Client-Key": "zXOqJ2k44R6xQqqlpPuizAr3rs58RhHXfU7Aj20V",
+        "Content-Type": "application/json",
+      };
+
+      try {
+        const response = await axios.post(endpoint, GET_RESTAURANTS_ALL, {
+          headers,
+        });
+
+        const responseData = response.data.data;
+        const restaurantsData = responseData.fitMes.edges.map(
+          (edge: RestaurantEdge) => edge.node
+        );
+        
+        setRestaurants(restaurantsData);
+        
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+
+    lookRestaurants();
+  }, []);
 
   return (
     <>
@@ -45,19 +95,22 @@ const HomePage: React.FC = () => {
         <h3>Restaurants</h3>
 
         <ul>
-          
-          {// eslint-disable-next-line @typescript-eslint/no-explicit-any
-          data && data.getRestaurantAll ? (data.getRestaurantAll.map((restaurant: any) => (
-            <Link className={styles.linkRestaurant} to={`/homepage/${restaurant.objectId}`}>
-              <Card
-                key={restaurant.objectId}
-                name={restaurant.name}
-                rating={restaurant.rating}
-                deliveryTime={restaurant.deliveryTime}
-              />
-            </Link>
-          ))
-          ):(
+          {restaurants.length > 0 ? (
+            restaurants.map((restaurant: Restaurant) => (
+              <Link
+              key={restaurant.objectId}
+                className={styles.linkRestaurant}
+                to={`/homepage/${restaurant.objectId}`}
+              >
+                <Card
+                  
+                  name={restaurant.name}
+                  rating={restaurant.rating}
+                  deliveryTime={restaurant.deliveryTime}
+                />
+              </Link>
+            ))
+          ) : (
             <p>No restaurants available.</p>
           )}
         </ul>
@@ -67,21 +120,3 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
-/*{
-            data.restaurantAll.map((restaurant: any) => (
-              <a href="">
-                <li key={restaurant.objectId}>{restaurant.name}</li>
-              </a>
-            ))} */
-/* {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          data.restaurantAll.map((restaurant: any) => (
-            <a className={styles.linkRestaurant} href="">
-              <Card
-                key={restaurant.objectId}
-                name={restaurant.name}
-                rating={restaurant.rating}
-                deliveryTime={restaurant.deliveryTime}
-              />
-            </a>
-          ))} */

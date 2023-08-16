@@ -14,7 +14,8 @@
   margin-top: 30px;
 }
 .imageRestaurant {
-  width: 400px;
+  width: 90%;
+  max-width: 400px;
 }
 
 .infoRestaurant h3 {
@@ -159,7 +160,9 @@
 .recommendationDropDown select:focus {
   outline: none;
 }
-
+.dishes {
+  width: 100%;
+}
 .dishes ul {
   padding: 0 6%;
 }
@@ -186,5 +189,14 @@
   .sectionDishes {
     display: flex;
     flex-direction: column;
+  }
+
+  .imageRestaurant {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .offerRestaurant {
+    padding: 0px 15px;
   }
 }

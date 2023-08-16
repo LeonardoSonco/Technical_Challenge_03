@@ -1,14 +1,23 @@
 import React, { useState } from "react";
-import Button from "../UI/Button";
-import Input from "../UI/Input";
-import { REGISTER_USER } from "../mutations/registerMutation";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 import styles from "./RegisterForm.module.css";
 
-import { useMutation } from "@apollo/client";
+import { REGISTER_USER } from "../queries/registerQuery";
+
 import Modal from "../UI/Modal";
+import Button from "../UI/Button";
+import Input from "../UI/Input";
+
+const endpoint = "https://parseapi.back4app.com/graphql";
+
+const headers = {
+  "X-Parse-Application-Id": "DSiIkHz2MVbCZutKS7abtgrRVsiLNNGcs0L7VsNL",
+  "X-Parse-Master-Key": "0cpnqkSUKVkIDlQrNxameA6OmjxmrA72tsUMqVG9",
+  "X-Parse-Client-Key": "zXOqJ2k44R6xQqqlpPuizAr3rs58RhHXfU7Aj20V",
+  "Content-Type": "application/json",
+};
 
 interface FormData {
   fullName: string;
@@ -29,7 +38,7 @@ const RegisterForm: React.FC = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputErrors, setInputErrors] = useState<Record<string, string>>({});
-  const [registerUser] = useMutation(REGISTER_USER);
+
   const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,14 +63,11 @@ const RegisterForm: React.FC = () => {
       errors.fullName = "O nome precisa ter mais de 9 letras.";
     } else if (formData.userName.length < 5) {
       errors.userName = "O userName precisa ter mais de 5 letras.";
-    }
-    else if (!validEmail(formData.email)) {
+    } else if (!validEmail(formData.email)) {
       errors.email = "Email inválido.";
-    }
-    else if (formData.password.length < 6) {
+    } else if (formData.password.length < 6) {
       errors.password = "A senha deve ter pelo menos 6 caracteres.";
-    }
-    else if (formData.password !== formData.confirmPassword) {
+    } else if (formData.password !== formData.confirmPassword) {
       errors.confirmPassword = "As senhas não coincidem.";
     }
 
@@ -73,19 +79,19 @@ const RegisterForm: React.FC = () => {
     setInputErrors({});
 
     try {
-      const { data } = await registerUser({
-        variables: {
-          username: formData.userName,
-          password: formData.password,
-          email: formData.email,
-          fullname: formData.fullName,
-        },
-      });
-
-      console.log("Usuário registrado com sucesso:", data.registerUser);
+      const response = await axios.post(
+        endpoint,
+        REGISTER_USER(formData.userName, formData.password, formData.email),
+        {
+          headers,
+        }
+      );
       setIsModalOpen(true);
+
+      return response.data.data;
     } catch (error) {
-      console.error(error);
+      console.error("Error:", error);
+      throw error;
     }
   };
 
@@ -105,7 +111,9 @@ const RegisterForm: React.FC = () => {
           onChange={handleInputChange}
           name="fullName"
         />
-        {inputErrors.fullName && <p className={styles.errorMessage}>{inputErrors.fullName}</p>}
+        {inputErrors.fullName && (
+          <p className={styles.errorMessage}>{inputErrors.fullName}</p>
+        )}
         <Input
           labelName="Username"
           typeInput="text"
@@ -113,7 +121,9 @@ const RegisterForm: React.FC = () => {
           onChange={handleInputChange}
           name="userName"
         />
-        {inputErrors.userName && <p className={styles.errorMessage}>{inputErrors.userName}</p>}
+        {inputErrors.userName && (
+          <p className={styles.errorMessage}>{inputErrors.userName}</p>
+        )}
         <Input
           labelName="E-Mail"
           typeInput="email"
@@ -121,7 +131,9 @@ const RegisterForm: React.FC = () => {
           onChange={handleInputChange}
           name="email"
         />
-        {inputErrors.email && <p className={styles.errorMessage}>{inputErrors.email}</p>}
+        {inputErrors.email && (
+          <p className={styles.errorMessage}>{inputErrors.email}</p>
+        )}
         <Input
           labelName="Password"
           typeInput="password"
@@ -129,7 +141,9 @@ const RegisterForm: React.FC = () => {
           onChange={handleInputChange}
           name="password"
         />
-        {inputErrors.password && <p className={styles.errorMessage}>{inputErrors.password}</p>}
+        {inputErrors.password && (
+          <p className={styles.errorMessage}>{inputErrors.password}</p>
+        )}
         <Input
           labelName="Confirm Password"
           typeInput="password"
@@ -137,7 +151,9 @@ const RegisterForm: React.FC = () => {
           onChange={handleInputChange}
           name="confirmPassword"
         />
-        {inputErrors.confirmPassword && <p className={styles.errorMessage}>{inputErrors.confirmPassword}</p>}
+        {inputErrors.confirmPassword && (
+          <p className={styles.errorMessage}>{inputErrors.confirmPassword}</p>
+        )}
 
         <Button
           buttonTitle={"Register"}

@@ -1,4 +1,5 @@
 import AddDish from "./AddDish";
+
 import styles from "./Cart.module.css";
 
 interface CartItem {
@@ -27,7 +28,9 @@ const Cart: React.FC<CartProps> = ({ cartItems, setCartItems }) => {
   };
 
   const removeCartItem = (itemId: string) => {
-    setCartItems(prevCartItems => prevCartItems.filter(item => item.objectId !== itemId));
+    setCartItems((prevCartItems) =>
+      prevCartItems.filter((item) => item.objectId !== itemId)
+    );
   };
 
   const totalItems = cartItems.reduce(

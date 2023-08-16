@@ -82,10 +82,9 @@ Technologies used for development.
 - [X] Header Responsive
 - [X] Footer Responsive
 - [X] HomePage Responsive
-- [] RestaurantPage Responsive
-- [] Sistema de Autenticação funcinal(nao permitir entrar no home sem estar logado)
+- [X] RestaurantPage Responsive
 - [] Testes Unitarios
-- [] Arrumar algumas Distribuições das paginas
+- [X] Arrumar algumas Distribuições das paginas
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

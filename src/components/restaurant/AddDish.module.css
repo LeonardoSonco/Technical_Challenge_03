@@ -1,41 +1,37 @@
-.addDishContainer{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.addDishContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.addDishInfo{
-    font-size: 16px;
-    font-weight: 500;
+.addDishInfo {
+  font-size: 16px;
+  font-weight: 500;
 }
-.addDishInfo span{
-    color: rgba(128, 128, 128, 1);
-}
-
-
-.addDish{
-    font-size: 20px;
-    color:  rgba(64, 64, 64, 1);
-    display: flex;
-
+.addDishInfo span {
+  color: rgba(128, 128, 128, 1);
 }
 
-.addDish a{
-     font-size: 20px;
-     cursor: pointer;
-     text-decoration: none;
+.addDish {
+  font-size: 20px;
+  color: rgba(64, 64, 64, 1);
+  display: flex;
 }
 
-.addDish span{
-     padding: 0 10px;
+.addDish a {
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-.buttonPlus{
-    border: transparent;
-    background: transparent;
-    font-size: 20px;
-    padding: 0;
-    cursor: pointer;
+.addDish span {
+  padding: 0 10px;
 }
 
-
+.buttonPlus {
+  border: transparent;
+  background: transparent;
+  font-size: 20px;
+  padding: 0;
+  cursor: pointer;
+}

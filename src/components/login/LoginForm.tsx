@@ -1,11 +1,22 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+
+import styles from "./LoginForm.module.css";
+
+import { LOGIN_USER } from "../queries/loginQuery";
+
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 
-import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "../mutations/loginMutation";
-import styles from "./LoginForm.module.css";
-import { Link, useNavigate } from "react-router-dom";
+const endpoint = "https://parseapi.back4app.com/graphql";
+
+const headers = {
+  "X-Parse-Application-Id": "DSiIkHz2MVbCZutKS7abtgrRVsiLNNGcs0L7VsNL",
+  "X-Parse-Master-Key": "0cpnqkSUKVkIDlQrNxameA6OmjxmrA72tsUMqVG9",
+  "X-Parse-Client-Key": "zXOqJ2k44R6xQqqlpPuizAr3rs58RhHXfU7Aj20V",
+  "Content-Type": "application/json",
+};
 
 interface FormData {
   userName: string;
@@ -28,8 +39,6 @@ const LoginForm: React.FC = () => {
     }));
   };
 
-  const [loginUser] = useMutation(LOGIN_USER);
-
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -48,17 +57,19 @@ const LoginForm: React.FC = () => {
     setInputError("");
 
     try {
-      const { data } = await loginUser({
-        variables: {
-          username: formData.userName,
-          password: formData.password,
-        },
-      });
+      const response = await axios.post(
+        endpoint,
+        LOGIN_USER(formData.userName, formData.password),
+        {
+          headers,
+        }
+      );
       navigate("/homepage");
-      console.log(data);
+
+      return response.data.data;
     } catch (error) {
-      setInputError("Usuario ou senha incorretos!");
-      console.error("Error logging in:", error);
+      console.error("Error:", error);
+      throw error;
     }
   };
 
