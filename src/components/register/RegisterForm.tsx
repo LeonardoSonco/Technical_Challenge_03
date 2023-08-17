@@ -19,6 +19,13 @@ const headers = {
   "Content-Type": "application/json",
 };
 
+
+export const validEmail = (email: string): boolean => {
+  const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
+  return emailRegex.test(email);
+};
+
+
 interface FormData {
   fullName: string;
   userName: string;
@@ -49,11 +56,7 @@ const RegisterForm: React.FC = () => {
     }));
   };
 
-  const validEmail = (email: string): boolean => {
-    const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
-    return emailRegex.test(email);
-  };
-
+  
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -90,7 +93,7 @@ const RegisterForm: React.FC = () => {
 
       return response.data.data;
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Erro ao criar usuaraio:", error);
       throw error;
     }
   };
