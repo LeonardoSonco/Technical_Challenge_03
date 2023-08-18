@@ -22,7 +22,6 @@ const AddDish: React.FC<CartProps> = ({
       const updatedQuantity = Math.max(0, foundItem.quantity - 1);
       if (updatedQuantity === 0) {
         onRemoveItem(itemId);
-        console.log("remove");
       } else {
         onUpdateQuantity(itemId, updatedQuantity);
       }

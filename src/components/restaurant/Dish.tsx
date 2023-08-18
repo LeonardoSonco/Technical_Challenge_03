@@ -5,7 +5,6 @@ interface DishType {
   name: string;
   description: string;
   price: number;
-  // Outras propriedades do prato
 }
 
 interface DishProps {
@@ -19,19 +18,9 @@ interface DishProps {
 }
 interface DishType {
   objectId: string;
-  // outras propriedades do objeto Dish
 }
 
 const Dish: React.FC<DishProps> = ({ dish, addToCart }) => {
-  //const { loading, error, data } = useQuery(GET_DISH);
-
-  //if (loading) return <p>Loading...</p>;
-  //if (error) return <p>Error: {error.message}</p>;
-
-  //const dishAccept = data.getDish.find(
-  //  (x: DishType) => x.objectId === dish.objectId
-  //);
-
   return (
     <li className={styles.dishContainer}>
       {

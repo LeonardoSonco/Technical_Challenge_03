@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 import { MemoryRouter } from "react-router-dom";
 
 describe("LoginForm", () => {
-  it("Campos vazios e sem erro de entrada (LOGIN)", () => {
+  it("Campos vazios e sem erro de entrada.", () => {
     render(
       <MemoryRouter>
         <LoginForm />
@@ -22,7 +22,7 @@ describe("LoginForm", () => {
       screen.queryByText(/Preencha os campos apara fazer o login!/i)
     ).toBeFalsy();
   });
-  it("Exibe mensagem de erro, ao tentar enviar form vazio (LOGIN)", async () => {
+  it("Exibe mensagem de erro, ao tentar enviar form vazio.", async () => {
     render(
       <MemoryRouter>
         <LoginForm />
@@ -62,6 +62,4 @@ describe("LoginForm", () => {
       screen.queryByText(/Preencha a senha apara fazer o login!/i)
     ).toBeNull();
   });
-
 });
-

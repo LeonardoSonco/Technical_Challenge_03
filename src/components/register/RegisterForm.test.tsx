@@ -4,7 +4,7 @@ import RegisterForm from "./RegisterForm";
 import { validEmail } from "./RegisterForm";
 
 describe("RegisterForm", () => {
-  it("renders with empty fields and no error messages", () => {
+  it("Inicia com os campos vazios e sem erros.", () => {
     render(
       <MemoryRouter>
         <RegisterForm />
@@ -22,14 +22,12 @@ describe("RegisterForm", () => {
       "Confirm Password"
     ) as HTMLInputElement;
 
-    // Verifica se os campos de input estão vazios
     expect(fullNameInput.value).toBe("");
     expect(userNameInput.value).toBe("");
     expect(emailInput.value).toBe("");
     expect(passwordInput.value).toBe("");
     expect(confirmPasswordInput.value).toBe("");
 
-    // Verifica se não há mensagens de erro exibidas
     expect(
       screen.queryByText(/O nome precisa ter mais de 9 letras./i)
     ).toBeNull();
@@ -43,7 +41,7 @@ describe("RegisterForm", () => {
     expect(screen.queryByText(/As senhas não coincidem./i)).toBeNull();
   });
 
-  it("displays error messages on form submit with invalid input", async () => {
+  it("Mensagens de erro ao enviar formulario com entrada invalida.", async () => {
     render(
       <MemoryRouter>
         <RegisterForm />
@@ -54,22 +52,18 @@ describe("RegisterForm", () => {
       name: "Register",
     }) as HTMLButtonElement;
 
-    // Simula o envio do formulário sem preencher os campos
     fireEvent.click(registerButton);
 
     expect(
       screen.queryByText(/O nome precisa ter mais de 9 letras./i)
     ).not.toBeNull();
 
-    // Preenche o campo de nome
     fireEvent.change(screen.getByLabelText("Full Name"), {
       target: { value: "Leonardo Sonco" },
     });
 
-    // Simula o envio do formulário novamente
     fireEvent.click(registerButton);
 
-    // Verifica a mensagem de erro para o userName
     expect(
       screen.queryByText(/O userName precisa ter mais de 5 letras./i)
     ).not.toBeNull();
@@ -78,20 +72,16 @@ describe("RegisterForm", () => {
       target: { value: "Leonardo" },
     });
 
-    // Simula o envio do formulário novamente
     fireEvent.click(registerButton);
 
-    // Verifica a mensagem de erro para o userName
     expect(screen.queryByText(/Email inválido./i)).not.toBeNull();
 
     fireEvent.change(screen.getByLabelText("E-Mail"), {
       target: { value: "leonardosonco@gmail.com" },
     });
 
-    // Simula o envio do formulário novamente
     fireEvent.click(registerButton);
 
-    // Verifica a mensagem de erro para o userName
     expect(
       screen.queryByText(/A senha deve ter pelo menos 6 caracteres./i)
     ).not.toBeNull();
@@ -100,14 +90,12 @@ describe("RegisterForm", () => {
       target: { value: "123456" },
     });
 
-    // Simula o envio do formulário novamente
     fireEvent.click(registerButton);
 
-    // Verifica a mensagem de erro para o userName
     expect(screen.queryByText(/As senhas não coincidem./i)).not.toBeNull();
   });
 
-  it("validates email correctly", () => {
+  it("Validação de email.", () => {
     const validEmails = [
       "test@example.com",
       "user@domain.co",
