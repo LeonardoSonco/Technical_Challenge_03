@@ -22,6 +22,13 @@ Currently, two official plugins are available:
 
 <!-- PROJECT LOGO -->
 <br />
+<div align="center">
+  <a href="#">
+    <img src="src/images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+</div>
+
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -70,7 +77,7 @@ Technologies used for development.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-
+To view the project, just download the project, go to your folder and run 'npm install', and then 'npm run dev'.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -83,7 +90,7 @@ Technologies used for development.
 - [X] Footer Responsive
 - [X] HomePage Responsive
 - [X] RestaurantPage Responsive
-- [] Testes Unitarios
+- [X] Testes Unitarios
 - [X] Arrumar algumas Distribuições das paginas
 
 
